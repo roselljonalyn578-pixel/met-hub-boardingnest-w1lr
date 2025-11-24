@@ -5,4 +5,4 @@ pip install -r requirements.txt
 python manage.py makemigrations websites
 python manage.py migrate
 python manage.py collectstatic --no-input
-python add_sample_data.py
+python fix_database.py

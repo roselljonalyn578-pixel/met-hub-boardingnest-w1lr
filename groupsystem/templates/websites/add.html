@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: 0 auto;
+        background: rgba(0, 20, 40, 0.8);
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #00ffff;
+        text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    }
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+        background: rgba(0, 40, 80, 0.5);
+        color: #00ffff;
+        backdrop-filter: blur(5px);
+    }
+    .form-control:focus {
+        outline: none;
+        border-color: #00ffff;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+    .btn {
+        background: rgba(0, 123, 255, 0.8);
+        color: #00ffff;
+        padding: 10px 20px;
+        border: 1px solid #00ffff;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        transition: all 0.3s ease;
+    }
+    .btn:hover {
+        background: rgba(0, 255, 255, 0.2);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        transform: translateY(-2px);
+    }
+    h2 {
+        color: #00ffff;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+</style>
+
+<div class="form-container">
+    <h2>Add New Website</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Website Name:</label>
+            {{ form.name }}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.url.id_for_label }}">URL:</label>
+            {{ form.url }}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.description.id_for_label }}">Description (optional):</label>
+            {{ form.description }}
+        </div>
+        
+        <button type="submit" class="btn">Add Website</button>
+    </form>
+</div>
+{% endblock %}

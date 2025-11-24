@@ -2,6 +2,5 @@
 set -o errexit
 
 pip install -r requirements.txt
-python manage.py collectstatic --no-input
 python manage.py migrate
-python add_sample_data.py
+python manage.py collectstatic --no-input

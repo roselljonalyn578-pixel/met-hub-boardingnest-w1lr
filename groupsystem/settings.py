@@ -3,8 +3,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-your-secret-key-here'
-DEBUG = False
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-your-secret-key-here')
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -52,6 +52,19 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Add sample data on startup
+import django
+from django.core.management import execute_from_command_line
+
+def create_sample_data():
+    try:
+        from websites.models import Website
+        if not Website.objects.exists():
+            Website.objects.create(name='M-E-T Hub', url='https://m-e-t-hub.onrender.com', description='M-E-T Hub Platform')
+            Website.objects.create(name='BoardingNest', url='https://boardingnest-w1lr.onrender.com/', description='BoardingNest Platform')
+    except:
+        pass
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
